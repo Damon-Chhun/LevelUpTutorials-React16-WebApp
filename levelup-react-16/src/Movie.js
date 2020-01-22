@@ -1,20 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
- class Movie extends Component {
-     static propTypes = {
-         movie: PropTypes.shape({
-             title: PropTypes.string.isRequired,
-            }),
-     }
-    
-    render(){
-        return(
-            <div>
-                <h2>{this.props.movie.title}</h2>
-                <p>{this.props.desc}</p>
-            </div>
-        )
-        }
-}
 
-export default Movie
+ const Movie = ({movie}) => (
+             <div>
+                <h2>{movie.title}</h2>
+            </div>
+        
+ )
+export default Movie;
+   Movie.propTypes = {
+        movie: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+           }).isRequired,
+    } 
