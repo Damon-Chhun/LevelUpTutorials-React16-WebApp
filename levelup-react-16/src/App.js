@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import Movie from './Movie'
@@ -23,16 +27,22 @@ async componentDidMount() {
 }
   render() {
   return (
+    <Router>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
+      <Route path="/test" component={test} />
       {this.state.movies.map(movie => <Movie movie={movie} key = {movie.id}/>)}
     </div>
+    </Router>
   );
 }
-}
+};
 
+const test = () => (
+  <h1>TEST</h1>
+);
 
 
 
