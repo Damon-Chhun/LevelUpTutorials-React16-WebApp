@@ -1,47 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch,
+  Link
 } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import Movie from './Movie'
+import MoviesList from './MoviesList'
 
 
-class App extends Component {
-state = {
-  movies: []
-}
-
-async componentDidMount() {
-  try {
-    const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=a43cccf48122a6ee7a6489ec15ce92da&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1
-    `);
-    const movies = await res.json();
-    this.setState({
-      movies: movies.results
-    })
-  } catch(e) {
-    console.log(e);
-  }
-}
-  render() {
-  return (
+const App = () => (
     <Router>
     <div className="App">
       <header className="App-header">
+        <Link to="/">
         <img src={logo} className="App-logo" alt="logo" />
+        </Link>
       </header>
-      <Route path="/test" component={test} />
-      {this.state.movies.map(movie => <Movie movie={movie} key = {movie.id}/>)}
+      <Switch>
+      <Route path="/:id" component={test} />
+      <Route exact ={true} path="/" component ={MoviesList} />
+      </Switch>
     </div>
     </Router>
-  );
-}
-};
+)
 
-const test = () => (
-  <h1>TEST</h1>
+const test = ({ match }) => (
+  <h1>{match.params.id}</h1>
 );
 
 
