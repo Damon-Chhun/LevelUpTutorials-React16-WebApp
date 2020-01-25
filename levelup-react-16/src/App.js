@@ -8,6 +8,7 @@ import {
 import logo from './logo.svg';
 import './App.css';
 import MoviesList from './MoviesList'
+import MoviesDetail from './MovieDetail';
 
 
 const App = () => (
@@ -19,17 +20,12 @@ const App = () => (
         </Link>
       </header>
       <Switch>
-      <Route path="/:id" component={test} />
+      <Route path="/:id" component={MoviesDetail} />
       <Route exact ={true} path="/" component ={MoviesList} />
       </Switch>
     </div>
     </Router>
 )
-
-const test = ({ match }) => (
-  <h1>{match.params.id}</h1>
-);
-
 
 
 export default App;
