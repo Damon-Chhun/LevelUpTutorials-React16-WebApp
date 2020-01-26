@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Poster } from "./Movie";
 import styled from "styled-components";
+import Overdrive from "react-overdrive";
 
 const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
 const BACKDROP_PATH = "http://image.tmdb.org/t/p/w1280";
@@ -27,10 +28,12 @@ class MoviesDetail extends Component {
     return (
       <MovieWrapper backdrop={`${BACKDROP_PATH}${movie.poster_path}`}>
         <MovieInfo>
-          <Poster
-            src={`${POSTER_PATH}${movie.poster_path}`}
-            alt={movie.title}
-          />
+          <Overdrive id={movie.id}>
+            <Poster
+              src={`${POSTER_PATH}${movie.poster_path}`}
+              alt={movie.title}
+            />
+          </Overdrive>
           <div>
             <h1>{this.state.movie.title}</h1>
             <h2>{this.state.movie.release_date}</h2>
