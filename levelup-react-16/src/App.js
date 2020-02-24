@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import rootReducer from "./rootReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
+import Toggle from "./Toggle";
 
 const store = createStore(rootReducer, {}, composeWithDevTools());
 
@@ -20,6 +21,7 @@ const App = () => (
             <img src={logo} className="App-logo" alt="logo" />
           </Link>
         </header>
+        <Toggle />
         <Switch>
           <Route path="/:id" component={MoviesDetail} />
           <Route exact={true} path="/" component={MoviesList} />
