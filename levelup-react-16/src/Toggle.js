@@ -1,18 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-
-class Toggle extends Component {
-  render() {
-    return (
-      <div>
-        {this.props.messageVisibility && (
-          <p>You will be seeing this if I'm a beast</p>
-        )}
-        <button>Toggle me</button>
-      </div>
-    );
-  }
-}
+const Toggle = ({ messageVisibility, dispatch }) => (
+  <div>
+    {messageVisibility && <p>Sup Bruh</p>}
+    <button
+      onClick={() =>
+        dispatch({
+          type: "TOGGLE_MESSAGE"
+        })
+      }
+    >
+      Toggle me
+    </button>
+  </div>
+);
 
 const mapStateToProps = state => ({
   messageVisibility: state.message.messageVisibility
