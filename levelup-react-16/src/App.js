@@ -10,8 +10,9 @@ import rootReducer from "./rootReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import Toggle from "./Toggle";
 import logger from "redux-logger";
+import thunk from "redux-thunk";
 
-const middleware = [logger];
+const middleware = [logger, thunk];
 
 const store = createStore(
   rootReducer,
