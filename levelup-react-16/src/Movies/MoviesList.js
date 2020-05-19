@@ -7,8 +7,9 @@ import { getMovies } from "./actions";
 
 class MoviesList extends Component {
   componentDidMount() {
-    const { getMovies, isLoaded } = this.props;
-    if (!isLoaded) {
+    const oneHour = 60 * 60 * 1000;
+    const { getMovies, isLoaded, moviesLoadedAt } = this.props;
+    if (!isLoaded || new Date() - new Date(moviesLoadedAt) > oneHour) {
       getMovies();
     }
   }
@@ -26,7 +27,8 @@ class MoviesList extends Component {
 
 const mapStateToProps = state => ({
   movies: state.movies.movies,
-  isLoaded: state.movies.moviesLoaded
+  isLoaded: state.movies.moviesLoaded,
+  moviesLoadedAt: state.movies.moviesLoadedAt
 });
 
 const mapDispatchToProps = dispatch =>
