@@ -1,27 +1,22 @@
 import React, { Component } from "react";
 import Movie from "./Movie";
 import styled from "styled-components";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { getMovies } from "./actions";
 
 class MoviesList extends Component {
-  state = {
-    movies: []
-  };
-  async componentDidMount() {
-    try {
-      const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=a43cccf48122a6ee7a6489ec15ce92da&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1
-    `);
-      const movies = await res.json();
-      this.setState({
-        movies: movies.results
-      });
-    } catch (e) {
-      console.log(e);
+  componentDidMount() {
+    const { getMovies, isLoaded } = this.props;
+    if (!isLoaded) {
+      getMovies();
     }
   }
   render() {
+    const { movies } = this.props;
     return (
       <MovieGrid>
-        {this.state.movies.map(movie => (
+        {movies.map(movie => (
           <Movie movie={movie} key={movie.id} />
         ))}
       </MovieGrid>
@@ -29,7 +24,20 @@ class MoviesList extends Component {
   }
 }
 
-export default MoviesList;
+const mapStateToProps = state => ({
+  movies: state.movies.movies,
+  isLoaded: state.movies.moviesLoaded
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getMovies
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);
 
 const MovieGrid = styled.div`
   display: grid;
